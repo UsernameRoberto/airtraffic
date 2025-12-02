@@ -1,5 +1,5 @@
-const defaultLat = 46.2237014771; // default position Lat airport Ljubljana
-const defaultLng = 14.4575996399; // default position Lng airport Ljubljana
+const defaultLat = 46.2237014771; // default position Lat airport Ljubljana - edit line 110 as well
+const defaultLng = 14.4575996399; // default position Lng airport Ljubljana - edit line 110 as well
 
 Cesium.Ion.defaultAccessToken = 'add_your_token';
 const viewer = new Cesium.Viewer('cesiumContainer', {
