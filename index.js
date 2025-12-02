@@ -107,7 +107,7 @@ let lastAltitudeDeg = 0;
 let maxAltitude = 12000;
 let altitude;
 const planes = new Map();
-const airport = { lat: 46.2237014771, lon: 14.4575996399 };
+const airport = { lat: 46.2237014771, lon: 14.4575996399 }; // You can add any other airport GPS location
 let selectedCountry;
 const lastPositions = new Map();
 
