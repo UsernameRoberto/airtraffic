@@ -137,7 +137,7 @@ This system integrates:
 
 📜 License
 
-(Choose one: MIT, Apache-2.0, GPL3, etc.) =)
+(Choose one or two... Maybe choose all of them: MIT, Apache-2.0, GPL3, etc.) =)
 
 by Roberto
 
