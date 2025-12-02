@@ -3,8 +3,8 @@
 
 A real-time Cesium-based Air Traffic Visualization System integrating aircraft telemetry, weather layers, and secure Apache authentication.
 
-🔧 Requirements
-Feature	Status
+🔧 Requirements Feature Status
+
 🔒 SSL Implemented	✔️
 🖥️ Apache Server	✔️
 🌐 OpenSky API	✔️
@@ -45,7 +45,7 @@ Update lines 8 and 10 with your HTTPS domain:
 <!-- ADD YOUR WEB DOMAIN NAME -->
 <link href="https://www.yourdomainname.com/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
 
-
+⚠️ Download Cesium https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
 ⚠️ Cesium requires HTTPS.
 
 📄 2. index.js
