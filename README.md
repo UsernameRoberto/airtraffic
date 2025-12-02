@@ -45,7 +45,8 @@ Update lines 8 and 10 with your HTTPS domain:
 <!-- ADD YOUR WEB DOMAIN NAME -->
 <link href="https://www.yourdomainname.com/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
 
-⚠️ Download Cesium https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
+⚠️ Download Cesium: https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
+⚠️ Make sure you have only ONE Build subDirectory in your main air traffic directory for Cesium Engine
 ⚠️ Cesium requires HTTPS.
 
 📄 2. index.js
