@@ -1,13 +1,14 @@
 # Ignore large binary models
 *.glb
 
-# Ignore compressed and raw aircraft DB files
 *.json
 *.json.gz
+
 
 # Ignore tokens and credentials
 *.png
 *.txt
+
 
 # Ignore build cache folders
 Build/Cesium
