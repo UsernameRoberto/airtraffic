@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ✨🛫 Live Air Traffic Control – Installation & Configuration Guide 🛬✨
 
 A real-time Cesium-based Air Traffic Visualization System integrating aircraft telemetry, weather layers, and secure Apache authentication.
