@@ -1,0 +1,38 @@
+# Disable directory listing
+Options -Indexes
+
+# Protect .htaccess file itself
+<Files ".htaccess">
+    Require all denied
+</Files>
+
+# Prevent access to common sensitive files
+<FilesMatch "(^\.|wp-config\.php|\.env|composer\.json|composer\.lock)$">
+    Require all denied
+</FilesMatch>
+
+# CORS Headers
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
+ <FilesMatch "^(index|opensky)\.php$">
+     AuthType Basic
+     AuthName "Restricted Access"
+     AuthUserFile C:/xampp/.htpasswd
+     Require valid-user
+  </FilesMatch>
+
+RewriteCond %{HTTP:Accept-Encoding} gzip
+RewriteCond %{REQUEST_FILENAME}.gz -f
+RewriteRule ^(.*)\.json$ $1.json.gz [L]
+
+<FilesMatch "\.json\.gz$">
+    RemoveType .gz
+    AddType application/json .gz
+    Header set Content-Encoding gzip
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+

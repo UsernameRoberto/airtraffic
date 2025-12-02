@@ -1,0 +1,831 @@
+@font-face {
+        font-family: "Oxanium";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/oxanium/v20/RrQPboN_4yJ0JmiMUW7sIGjd1IA9G81JfkiFD3ULdw.woff2)
+                format("woff2");
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+                U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+                U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+                U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+        font-family: "Oxanium";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/oxanium/v20/RrQPboN_4yJ0JmiMUW7sIGjd1IA9G81JfkiLD3U.woff2)
+                format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC,
+                U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+html, body, #cesiumContainer { z-index:0;overflow:hidden;font-family: 'Oxanium', sans-serif;width: 100%; height: 100%; margin: 0; padding: 0; background: #000; }
+    #telemetry {
+      position: absolute; 
+	  top: 5px; 
+	  left: 0px; 
+	  bottom:0px;
+	  width: 200px; 
+	  height: auto;
+      overflow-y: auto; 
+	  background:rgba(0,0,0,0.5);
+      backdrop-filter:blur(4px); 
+	  color: white;
+      padding: 10px; 
+	  font-family: 'Oxanium', sans-serif; 
+	  font-size: 12px;
+      z-index: 10000; 
+	  border-radius: 4px;
+
+    }
+	#righter {
+      position: absolute; top: 5px; right: 0px; bottom:0px;width: 200px; height: auto;
+      overflow-y: auto; background: rgba(0, 0, 0, 0.7); color: white;
+      padding: 10px; font-family: 'Oxanium', sans-serif; font-size: 12px;
+      z-index: 10000; border-radius: 4px;
+
+    }
+	.sizer {
+		font-size:12px; margin-top:8px;
+	}
+    #telemetry button, .overlay-btn {
+      margin: 2px; padding: 6px 8px; background: DodgerBlue;font-family: 'Oxanium', sans-serif;
+      border: none; color: white; cursor: pointer; border-radius: 4px;
+    }
+    #telemetry button:hover, .overlay-btn:hover { background: #00bfff; }
+    .overlay-count {
+      margin: 2px; padding: 6px 8px; background: rgba(0,0,0,0.7);font-family: 'Oxanium', sans-serif;
+      border: none; color: white; cursor: pointer; border-radius: 4px;width:auto;
+
+    }
+	.overlay-count {
+      position: relative;
+      z-index: 10000;
+    }
+    .overlay-btn {
+      position: relative;
+      z-index: 10000;
+    }
+	#attitudeIndicator {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Make the gauge round */
+}
+
+#altitudeGauge{
+	padding-top:20px;
+	
+}
+    /*.overlay-btn + .overlay-btn {*/
+    /*  bottom: 45px;*/
+    /*}*/
+	#fps-counter {
+    position: fixed;
+    bottom: 5px;
+    right: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    color: lime;
+    font-family: Oxanium;
+    font-size: 1.6em;
+	font-style:normal;
+    padding: 4px 8px;
+    z-index: 9999;
+    pointer-events: none;
+    }
+    #loadingOverlay {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.3);
+      color: white;
+      font-family: 'Oxanium', sans-serif;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20000;
+    }
+	#preloader {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  font-family: 'Oxanium', sans-serif;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+  flex-direction: column;
+  user-select: none;
+}
+.title {
+	font-family:'Oxanium', sans-serif;
+}
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #ccc;
+  border-top: 3px solid #00bfff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-top:20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.weather-icon {
+  cursor: pointer;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.weather-icon:hover {
+  filter: drop-shadow(0 0 5px #00f8ff) drop-shadow(0 0 10px #00f8ff);
+  
+}
+#countrySelect {
+    position: fixed;
+    top: 125px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: .9;
+    color: white;
+    font-family: 'Oxanium', sans-serif;
+    font-size: 1.0em;
+    background: #222;
+    padding: 5px 10px;
+    width: 246px;
+	}
+select {
+  padding: 3px 12px;
+  outline: none;
+  width: 246px;
+  margin-bottom: 20px;
+  cursor:pointer;
+}
+option:nth-of-type(odd) {
+  background: #222;
+  cursor:pointer;
+}
+select:hover,
+select:focus {
+  background: DodgerBlue;
+}
+select:hover,
+select:focus {
+  background: DodgerBlue;
+}
+option:hover,
+option:focus {
+  background: DodgerBlue;
+}
+select.widthHeight::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  cursor:pointer;
+}
+
+select.style::-webkit-scrollbar-track {
+  border: transparent;
+  background-color: #222;
+  cursor:pointer;
+}
+
+select.style::-webkit-scrollbar-thumb {
+  background-color: DodgerBlue;
+  border: transparent;
+  cursor:pointer;
+}
+/* Buttons */
+select.style::-webkit-scrollbar-button:single-button {
+  background-color: DodgerBlue;
+  display: block;
+  border-style: solid;
+  height: 13px;
+  width: 16px;
+  cursor:pointer;
+}
+/* Up */
+select.style::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 8px 8px 8px;
+  border-color: transparent transparent #555555 transparent;
+  cursor:pointer;
+}
+
+select.style::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+  border-color: transparent transparent #777777 transparent;
+  cursor:pointer;
+}
+/* Down */
+select.style::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 8px 8px 0 8px;
+  border-color: #555555 transparent transparent transparent;
+  cursor:pointer;
+}
+
+select.style::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+  border-color: #777777 transparent transparent transparent;
+  cursor:pointer;
+}
+
+#bottomMenu {
+	text-align:center;position:fixed;left:50%;transform:translateX(-50%);bottom:5px;z-index:1000;width:100%;background:transparent;
+}
+
+#clock-controls {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+	transform:translateX(-50%);
+    font-family: 'Oxanium', sans-serif;
+    z-index: 1000;
+	
+}
+
+#city-input {
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    width: 150px;
+	background:rgba(0,0,0,0.7);
+	color:white;
+	font-family:'Oxanium',sans-serif;
+	text-align:center;
+}
+
+#clock-error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px; 
+	display:none;
+	position:fixed;
+	left:-100%;
+}
+
+#gaugeContainer {
+	top: 53%;
+    transform: translateY(-50%);
+    position: fixed;
+    right: 0px;
+    height: 100%;
+    z-index: 1;
+    background: transparent;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 220px;
+  
+}
+
+#weatherContainer {
+	top:25%;
+	transform:translateY(-50%);
+	 position: absolute;
+    right: 0px;
+    height:auto;
+	z-index: 1;
+  background: transparent;
+  box-sizing: border-box;
+  border-radius:5px;
+  width:220px;
+  
+  
+}
+.speedGauge {
+	width: 100%; height: 100%;font-family: 'Oxanium', sans-serif;
+}
+.altitudeGauge {
+	width: 100%; height: 100%;font-family: 'Oxanium', sans-serif;
+}
+#compassContainer {
+	width: 150px; height: 150px; cursor: pointer;
+}
+#compassWindContainer {
+	width: 150px; height: 150px; cursor: pointer;
+}
+#compass {
+	width: 100%; height: 100%; font-family: 'Oxanium', sans-serif;
+}
+#compassWind {
+	width: 100%; height: 100%; font-family: 'Oxanium', sans-serif;
+}
+#speedGauge {
+	width: 150px; height: 150px;cursor:pointer;
+}
+#speedGaugeWind {
+	width: 150px; height: 150px;cursor:pointer;
+}
+#legendContainer{
+	filter: brightness(1.50);
+}
+#altitudeGauge {
+	width: 150px; height: 150px;cursor:pointer;
+}
+body, ::backdrop {
+    background: none;
+}
+ 
+.cesium-button.fullscreen-button {
+    /* Add your custom styles here */
+    position: fixed; /* Example: to float over the toolbar */
+    margin-right:100px;
+    z-index: 10000; /* Ensure it's above other toolbar elements */
+}
+#fullscreen-button {
+    position: absolute;
+    top:5px;
+    margin-right: -40px;
+	border:none;
+    box-sizing: border-box;
+    transition: transform .3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;             /* Remove default padding */
+    fill: #fff;
+	border-radius:5px;
+	text-decoration:none;
+	background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+}
+
+#fullscreen-button:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+
+
+
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button:hover:not(.inactive) {
+  border: 0px solid white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Inactive = grey gradient */
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button.fullscreen-button .inactive {
+  background: linear-gradient(
+    to bottom,
+    rgba(116, 117, 119, 0.7) 0%,
+    rgba(58, 68, 82, 0.7) 11%,
+    rgba(46, 50, 56, 0.7) 46%,
+    rgba(53, 53, 53, 0.7) 81%,
+    rgba(53, 53, 53, 0.7) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Inactive + hover = Cesium-like pale blue background and glow */
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button.inactive:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button .active {
+  background: #ff0000 !important; /* solid bright red, resets gradient */
+  background-image: none !important; /* remove any gradient */
+  color: white !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* When active button is hovered */
+.cesium-button.cesium-toolbar-button.cesium-fullscreen-button .active:hover {
+  border: 0px solid white !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Hide second icon by default */
+#fullscreen-button svg:nth-child(2) { 
+    display: none;
+}
+
+/* Hide first icon when fullscreen */
+[fullscreen] #fullscreen-button svg:nth-child(1) {
+    display: none;
+}
+
+/* Show second icon when fullscreen */
+[fullscreen] #fullscreen-button svg:nth-child(2) {
+    display: inline-block;
+}
+
+/* Make SVGs take full button size */
+#fullscreen-button svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Optional: prevent SVG pointer events to ensure whole button catches clicks */
+#fullscreen-button svg {
+    pointer-events: none;
+}
+
+
+.rotate {
+    -moz-transition: all .5s linear;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+	background:transparent;
+	transform:rotate(0deg);
+
+}
+.rotate.down {
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+
+}
+input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 15px;
+  background: black;
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+  height: 15px;
+  background: black;
+  border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none; 
+  /* creating a custom design */
+  height: 15px;
+  width: 15px;
+  background: black;
+  border-radius: 50%;
+  border: 2px solid #f00;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #f00;
+}
+
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 15px;
+  width: 15px;
+  background: black;
+  border-radius: 50%;
+  border: 1px solid #f00;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px #f00;
+}
+div.scroller {
+  overflow-y: auto;
+  scrollbar-color: DodgerBlue #000000;
+}
+.cesium-baseLayerPicker-dropDown-visible {
+ scrollbar-color: DodgerBlue #000000;
+ background:rgba(0,0,0,0.5);
+backdrop-filter:blur(4px);
+}
+#altitude {
+	z-index:1000;
+	position:absolute;
+	right:5px;
+	bottom:5px;
+	text-align:left;
+	font-size:1.1em;
+	font-family: 'Oxanium', sans-serif;
+	color:white;
+	width:140px;
+	height:auto;
+	background-color:rgba(0,0,0,0.7);
+	padding:5px 5px 5px 5px;
+	border-radius:5px;
+	display:none;
+}
+#telemetry button.track-btn.tracked {
+  background-color: DodgerBlue !important; /* Green */
+  color: white;
+}
+
+#telemetry button.track-btn.tracked:hover {
+  background-color: #388E3C !important; /* Darker green */
+}
+
+#telemetry .plane-entry.tracked-row {
+  background: none !important;
+  border-left: 5px solid DodgerBlue !important;
+  padding-left: 10px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+
+#toggWeather{
+	position:fixed;
+	z-index:1001;
+	top:55.5%;
+	transform:translateY(-50%);
+	right:219px;
+	color:white;
+	width:auto;
+	height:auto;
+	padding-top:9px;
+	padding-bottom:7px;
+	padding-left:10px;
+	padding-right:10px;
+	font-size:1.3em;
+	background:rgba(0,0,0,0.7);
+	cursor:pointer;
+	text-decoration:none;
+	border:none;
+}
+#toggWeather:hover{
+	
+	background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+#toggWeather .active {
+  background: #ff0000 !important; /* solid bright red, resets gradient */
+  background-image: none !important; /* remove any gradient */
+  color: white !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+#toggleTelemetry{
+	position:fixed;
+	z-index:1001;
+	top:50%;
+	transform:translateY(-50%);
+	left:219px;
+	color:white;
+	width:auto;
+	height:auto;
+	padding-top:9px;
+	padding-bottom:7px;
+	padding-left:10px;
+	padding-right:10px;
+	font-size:1.3em;
+	background:rgba(0,0,0,0.7);
+	cursor:pointer;
+	text-decoration:none;
+	border:none;
+}
+#toggleTelemetry:hover{
+	
+	background: linear-gradient(
+    to bottom,
+    rgba(173, 216, 255, 0.9) 0%,
+    rgba(100, 170, 255, 0.9) 100%
+  );
+  border: 1px solid #aef;
+  box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+              0 0 8px rgba(173, 216, 255, 0.6);
+}
+
+#toggleTelemetry .active {
+  background: #ff0000 !important; /* solid bright red, resets gradient */
+  background-image: none !important; /* remove any gradient */
+  color: white !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+#airplaneContainer {
+    transition: transform 2s ease-in-out; /* smooth rotation */
+	 transform-origin: center center; /* Important */
+    transform-box: fill-box;         /* Ensures origin applies to SVG element */
+}
+
+#windArrow {
+    transition: transform 2s ease-in-out; /* smooth rotation */
+	 transform-origin: center center; /* Important */
+    transform-box: fill-box;         /* Ensures origin applies to SVG element */
+}
+
+
+#speedNeedlespeedNeedle {
+    transition: transform 2s ease-in-out; /* smooth rotation */
+	 /* transform-origin: center center; Important */
+     /* transform-box: fill-box;        Ensures origin applies to SVG element */
+}
+#altitudeNeedle {
+    transition: transform 2s ease-in-out; /* smooth rotation */
+	 /* transform-origin: center center; Important */
+    /* transform-box: fill-box;         Ensures origin applies to SVG element */
+}
+#toggleWeatherNext,
+#toggleWeatherPrev {
+    position: fixed;
+    transform: translateY(-50%);
+    z-index: 1001;
+    color: white;
+    width: auto;
+    height: auto;
+    padding: 9px 15px;
+    font-size: 1.3em;
+    background: rgba(0,0,0,0.7);
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: 
+        background 0.3s ease, 
+        transform 0.2s ease, 
+        box-shadow 0.2s ease;
+}
+
+/* Positioning */
+#toggleWeatherNext { top: 50%; }
+#toggleWeatherPrev { top: 56%; }
+
+/* Hover effect with gradient + subtle zoom & glow */
+#toggleWeatherNext:hover,
+#toggleWeatherPrev:hover {
+    background: linear-gradient(
+        to bottom,
+        rgba(173, 216, 255, 0.9) 0%,
+        rgba(100, 170, 255, 0.9) 100%
+    );
+    border: 1px solid #aef;
+    box-shadow: inset 0 0 6px rgba(173, 216, 255, 0.8),
+                0 0 8px rgba(173, 216, 255, 0.6);
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Arrow icon subtle movement on hover */
+#toggleWeatherNext i,
+#toggleWeatherPrev i {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+#toggleWeatherNext:hover i { transform: translateX(5px); }  /* arrow points right */
+#toggleWeatherPrev:hover i { transform: translateX(-5px); } /* arrow points left */
+
+/* Active panel styling with optional pulse */
+#toggleWeatherNext.active,
+#toggleWeatherPrev.active {
+    background: #ff0000 !important;
+    background-image: none !important;
+    color: white !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { background-color: rgba(255,0,0,0.7); }
+    to { background-color: rgba(255,0,0,0.9); }
+}
+
+#labelsContainer {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.airport-label.hologram {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #00fff7;
+  text-shadow:
+    0 0 5px #00fff7,
+    0 0 10px #00fff7,
+    0 0 20px #00fff7,
+    0 0 40px #00fff7;
+  font-weight: bold;
+  font-size: 14px;
+  background: rgba(0, 255, 247, 0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  user-select: none;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+#countryFilter{
+	text-align:center;
+	padding:5px;
+	font-size:1.0em;
+	color:white;
+	background:rgba(0,0,0,0.7);
+	font-family:'Oxanium',sans-serif;
+	width:auto;
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+	top:50px;
+	z-index:1000;
+	text-decoration:none;
+	border:none;
+}
+
+ #monitor {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+            background: transparent;
+            color: white;
+            padding: 10px;
+            font-family: 'Oxanium', sans-serif;
+            cursor: pointer;
+            z-index: 1000;
+			text-align:center;
+			font-size:0.9em;
+        }
+
+        canvas {
+            display: block;
+            background: transparent;
+            margin-top: 5px;
+			height:30%;
+			width:200px;
+        }
+#suggestions {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 85px;
+  width: 235px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  font-family: 'Oxanium', sans-serif;
+  z-index: 10002;
+  border: 1px solid #333;
+  max-height: 450px;
+  overflow-y: auto;
+  display: none;
+  font-size: 1em;
+  scrollbar-color: DodgerBlue #000000; /* Firefox */
+              /* scrollbar-width: thin;  Firefox */
+}
+
+/* WebKit (Chrome, Edge, Safari) custom scroll styling */
+#suggestions::-webkit-scrollbar {
+  width: 8px;
+}
+
+#suggestions::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+#suggestions::-webkit-scrollbar-thumb {
+  background-color: DodgerBlue;
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
+
+/* Optional: hover effect on suggestion items */
+#suggestions div {
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#suggestions div:hover {
+  background: DodgerBlue;
+}
