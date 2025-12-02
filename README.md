@@ -115,7 +115,10 @@ RewriteRule ^(.*)\.json$ $1.json.gz [L]
 Ensure both files exist:
 
 yourdirectory/basic-ac-db.json
+https://drive.google.com/file/d/11AYbG_aKMBzwkRqQEmavRTv8zMh6J6oO/view?usp=sharing
+
 yourdirectory/basic-ac-db.json.gz
+https://drive.google.com/file/d/1e3LTUpIsBdMRggo7__XjR2gXyJN4vmvz/view?usp=sharing
 
 
 Restart Apache.
