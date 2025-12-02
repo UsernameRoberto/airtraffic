@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ✨🛫 Live Air Traffic Control – Installation & Configuration Guide 🛬✨
 
 A real-time Cesium-based Air Traffic Visualization System integrating aircraft telemetry, weather layers, and secure Apache authentication.
@@ -134,3 +135,7 @@ This system integrates:
 📜 License
 
 (Choose one: MIT, Apache-2.0, GPL3, etc.)
+=======
+# airtraffic
+Live Air Traffic Radar
+>>>>>>> b8743b49372f6eef24ee13a4efe1e7d498e978c6
