@@ -134,8 +134,7 @@ This system integrates:
 
 📜 License
 
-(Choose one: MIT, Apache-2.0, GPL3, etc.)
-=======
-# airtraffic
-Live Air Traffic Radar
->>>>>>> b8743b49372f6eef24ee13a4efe1e7d498e978c6
+(Choose one: MIT, Apache-2.0, GPL3, etc.) =)
+
+by Roberto
+
