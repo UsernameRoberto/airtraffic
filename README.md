@@ -1,38 +1,39 @@
-
 ✨🛫 Live Air Traffic Control – Installation & Configuration Guide 🛬✨
 
 A real-time Cesium-based Air Traffic Visualization System integrating aircraft telemetry, weather layers, and secure Apache authentication.
 
 🔧 Requirements Feature Status
-
-🔒 SSL Implemented	✔️
+Feature	Status
+🔒 SSL	✔️
 🖥️ Apache Server	✔️
 🌐 OpenSky API	✔️
 ☁️ OpenWeatherMap API	✔️
 🗺️ Cesium Ion API	✔️
 🌐 I. Required APIs
+
 1️⃣ OpenSky API
 
 Instruction image: opensky_token.png
-Google Drive:
-(you may remove these if they are private)
+(Google Drive link here, if applicable)
 
 Create/manage your token:
-https://opensky-network.org/my-opensky/account
+OpenSky Account
 
 2️⃣ OpenWeatherMap API
 
 Instruction image: openweathermap_token.png
+(Google Drive link here, if applicable)
 
 Generate your API key:
-https://openweathermap.org/api
+OpenWeatherMap API
 
 3️⃣ Cesium Ion API
 
 Instruction image: cesium_ion_token.png
+(Google Drive link here, if applicable)
 
 Create/manage Ion access tokens:
-https://ion.cesium.com/tokens?page=1
+Cesium Ion Tokens
 
 📝 II. Required File Edits
 📄 1. index.html
@@ -45,9 +46,14 @@ Update lines 8 and 10 with your HTTPS domain:
 <!-- ADD YOUR WEB DOMAIN NAME -->
 <link href="https://www.yourdomainname.com/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
 
-⚠️ Download Cesium: https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
-⚠️ Make sure you have only ONE Build subDirectory in your main air traffic directory for Cesium Engine
-⚠️ Cesium requires HTTPS.
+
+⚠️ Important Notes:
+
+Download Cesium: Cesium Download
+
+Cesium Setup: Ensure you have only ONE Build subDirectory in your main air traffic directory for Cesium Engine.
+
+Cesium Requires HTTPS.
 
 📄 2. index.js
 
@@ -67,7 +73,7 @@ Update lines 7 & 8:
 
 // === CONFIG ===
 $clientId = 'your_client_id_json_credentials';
-$clientSecret = 'your_client_Secret_json_credentials';
+$clientSecret = 'your_client_secret_json_credentials';
 
 🔐 III. Apache Security Setup
 1. Create .htpasswd
@@ -77,16 +83,15 @@ $clientSecret = 'your_client_Secret_json_credentials';
 C:/xampp/.htpasswd
 
 
-Generate user + password hash:
-https://hostingcanada.org/htpasswd-generator/
+Generate user + password hash: htpasswd Generator
 
 ⚠️ Choose: Apache-specific salted MD5
 
-Restart Apache after saving.
+After saving, restart Apache.
 
-🔐 IV. Protect PHP Files with .htaccess
+2. Protect PHP Files with .htaccess
 
-Add:
+Add the following to your .htaccess file to secure PHP endpoints:
 
 <FilesMatch "^(index|opensky)\.php$">
      AuthType Basic
@@ -96,11 +101,11 @@ Add:
 </FilesMatch>
 
 
-To protect more files:
+To protect more files, update the pattern to match additional PHP files:
 
 (index|opensky|admin|weather)\.php$
 
-📦 Gzipped JSON support
+📦 Gzipped JSON Support
 RewriteCond %{HTTP:Accept-Encoding} gzip
 RewriteCond %{REQUEST_FILENAME}.gz -f
 RewriteRule ^(.*)\.json$ $1.json.gz [L]
@@ -113,16 +118,13 @@ RewriteRule ^(.*)\.json$ $1.json.gz [L]
 </FilesMatch>
 
 
-Ensure both files exist:
+Ensure the following files exist in your directory:
 
-yourdirectory/basic-ac-db.json
-https://drive.google.com/file/d/11AYbG_aKMBzwkRqQEmavRTv8zMh6J6oO/view?usp=sharing
+basic-ac-db.json: Google Drive Link
 
-yourdirectory/basic-ac-db.json.gz
-https://drive.google.com/file/d/1e3LTUpIsBdMRggo7__XjR2gXyJN4vmvz/view?usp=sharing
+basic-ac-db.json.gz: Google Drive Link
 
-
-Restart Apache.
+After saving the changes, restart Apache.
 
 🚀 Project Summary
 
@@ -138,11 +140,18 @@ This system integrates:
 
 📜 License
 
-(Choose one or two... Maybe choose all of them: MIT, Apache-2.0, GPL3, etc.) =)
+(Choose one or more licenses: MIT, Apache-2.0, GPL3, etc.)
 
-by Roberto
+Status Check:
 
-You can peekaboo here Live on CodePen
+To verify if OpenSky API is functioning correctly, run the following in your command line (CMD):
 
-https://codepen.io/roberto-puhan-gmail-com/pen/gbrdeaY
+curl -I https://opensky-network.org/api/
 
+
+Expected Response: If you get a 503 error, it means the servers are down, and OpenSky is temporarily unavailable.
+
+✨ Live Demo
+
+You can explore the project live on CodePen:
+Live Demo on CodePen
