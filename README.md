@@ -68,7 +68,7 @@ const defaultLng = 14.4575996399;
 
 Cesium.Ion.defaultAccessToken = 'add_your_token';
 
-// At line 1742:
+// At line 1742: Add Openweathermap api key
 const apiKey = "add_your_api_key";
 
 📄 3. skyopen.php & opensky.php
