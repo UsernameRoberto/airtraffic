@@ -46,8 +46,8 @@ Update lines 8 and 10 with your HTTPS domain:
 <!-- ADD YOUR WEB DOMAIN NAME -->
 <link href="https://www.yourdomainname.com/Build/Cesium/Widgets/widgets.css" rel="stylesheet" />
 
-Please download Build Cesium Ion engine from here
 
+Please download Build Cesium Ion engine from here
 https://drive.google.com/file/d/1PkPH5TfLXRWlhZwbmWnNS7HUc9KPa2zU/view?usp=sharing
 
 
