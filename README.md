@@ -125,9 +125,13 @@ RewriteRule ^(.*)\.json$ $1.json.gz [L]
 Ensure the following files exist in your directory:
 
 basic-ac-db.json: Google Drive Link
+
 https://drive.google.com/file/d/11AYbG_aKMBzwkRqQEmavRTv8zMh6J6oO/view?usp=drive_link
+
 basic-ac-db.json.gz: Google Drive Link
+
 https://drive.google.com/file/d/1e3LTUpIsBdMRggo7__XjR2gXyJN4vmvz/view?usp=drive_link
+
 After saving the changes, restart Apache.
 
 🚀 Project Summary
